@@ -1,0 +1,46 @@
+.tabs-scroll-arrow {
+    display: none;
+}
+
+@media (max-width: 600px) and (min-height: 680px) {
+    .tabs-scroll-container {
+        position: relative;
+    }
+
+    /* Aplica scroll horizontal a las pestañas */
+    #custom-tabs {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        scrollbar-width: none !important;
+        /* Firefox */
+        mask-image: linear-gradient(to right, black 90%, transparent);
+        -webkit-mask-image: linear-gradient(to right, black 90%, transparent);
+    }
+
+    #custom-tabs .nav::-webkit-scrollbar {
+        display: none !important;
+        /* Chrome, Safari */
+    }
+
+    /* Asegura que cada tab no se rompa en varias líneas */
+    #custom-tabs .nav-item {
+        flex: 0 0 auto !important;
+        white-space: nowrap !important;
+    }
+
+    .tabs-scroll-arrow {
+        position: absolute;
+        right: -15px;
+        top: 0;
+        height: 9%;
+        width: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(to left, silver, silver, transparent);
+        pointer-events: none;
+        color: #2a2a2a;
+    }
+}

@@ -1,0 +1,30 @@
+.navbar {
+    background-color: var(--navbar-bg-color) !important;
+}
+
+.navbar-toggler {
+    border-color: white !important;
+}
+
+.nav-logo {
+    background-color: white;
+    object-fit: contain;
+    border-radius: 4px;
+    margin-right: 10px;
+    height: 40px;
+    width: 40px;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-toggler-icon {
+    color: antiquewhite !important;
+    /* background-image: url(https://cdn.iconscout.com/icon/free/png-512/free-hamburger-menu-icon-download-in-svg-png-gif-file-formats--list-checklist-document-user-interface-pack-icons-1244641.png?f=webp&w=256) !important; */
+}
+
+.navbar>.container-fluid {
+    margin: 0px 10px !important;
+}

@@ -1,0 +1,15 @@
+.dropdown-filter-menu {
+    background: white;
+    border: 1px solid silver;
+    border-radius: 8px;
+    padding: 10px;
+    max-height: 300px;
+    min-width: 200px;
+    overflow: auto;
+}
+
+@media (max-width: 1400px) {
+    .dropdown-filter-menu {
+        max-height: 240px;
+    }
+}

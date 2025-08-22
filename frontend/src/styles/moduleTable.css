@@ -1,0 +1,45 @@
+.table-container {
+    overflow-y: auto !important;
+    border-radius: 8px;
+    /* 
+    * Fullscreen - 100dvh
+    * Navbar Height - 62px
+    * Main Module Wrapper Padding- 32px
+    * Main Module Layout Padding - 50px
+    * Header, Tabs and Table Top Bar Height - 235px (aprox)
+    */
+    /* height: calc(100dvh - 62px - 32px - 50px - 235px) !important; */
+}
+
+.table-container.expanded {
+    height: 90% !important;
+}
+
+td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 300px;
+}
+
+/* Rows wrap */
+.table-striped>tbody>tr:nth-of-type(odd)>* {
+    white-space: nowrap;
+}
+
+/* Rows padding */
+.table>:not(caption)>*>* {
+    padding: .2rem;
+}
+
+@media (max-width: 1400px) {
+    .table-container {
+        overflow-y: auto !important;
+    }
+}
+
+@media (max-width: 400px) and (min-height: 680px) {
+    .table-container {
+        overflow-y: auto !important;
+    }
+}
