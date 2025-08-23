@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 import com.probeco.erp.enums.EBancoProveedor;
 import com.probeco.erp.enums.EConfirm;
 import com.probeco.erp.enums.EEstadoPago;
-import com.probeco.erp.enums.EEstadoRegistroContable;
 import com.probeco.erp.enums.EMoneda;
 
 public record DtoPagoRequest(
@@ -26,7 +25,7 @@ public record DtoPagoRequest(
     EMoneda moneda,
 
     @NotNull
-    String centroDeCostos,
+    String centroCosto,
 
     float monto,
     
