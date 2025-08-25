@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import Logo from '../assets/grupo-planeta-logo.jpeg';
+import Logo from '../assets/Logo-ProBeCo-Color.png';
 import axios from 'axios'; // Assuming you're using axios
 
 const LoginView = () => {
