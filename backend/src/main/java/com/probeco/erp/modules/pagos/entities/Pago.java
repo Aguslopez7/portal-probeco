@@ -39,6 +39,9 @@ public class Pago extends AuditableEntity {
     @Enumerated(EnumType.STRING) // Save enum as a string in the database
     @Column(name = "moneda", nullable = false)
     private EMoneda moneda;
+
+    @Column(name = "centroCosto", nullable = false)
+    private String centroCosto;
     
     @Column(name = "monto", nullable = false)
     private float monto;
