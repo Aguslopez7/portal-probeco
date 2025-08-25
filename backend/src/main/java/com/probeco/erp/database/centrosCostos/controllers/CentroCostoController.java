@@ -17,7 +17,7 @@ import com.probeco.erp.database.centrosCostos.services.CentroCostoService;
 
 
 @RestController
-@RequestMapping("/centroCostos")
+@RequestMapping("/centro-costos")
 public class CentroCostoController {
 
     private final CentroCostoService centroCostoService;
@@ -27,7 +27,7 @@ public class CentroCostoController {
     }
 
     @PreAuthorize("hasAnyRole('GERENTE', 'CONTABLE', 'SYSADMIN', 'RRHH' , 'VENTAS')")
-    @GetMapping("/c")
+    @GetMapping()
     public ResponseEntity<?> listarCentroCostos() {
         try {
             return ResponseEntity.ok(centroCostoService.listarCentrosCostos());
