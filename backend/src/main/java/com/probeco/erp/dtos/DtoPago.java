@@ -16,7 +16,7 @@ public record DtoPago(
     EMoneda moneda,
 
     @NotNull
-    String centroDeCostos,
+    String centroCosto,
 
     @NotNull
     @JsonPropertyDescription("{\"format\": \"currency\"}")
