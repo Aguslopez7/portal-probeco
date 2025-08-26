@@ -7,9 +7,8 @@ import ImportExcelButton from '@components/ImportExcelButton';
 import ModuleTable from '@components/table/ModuleTable';
 
 import BancosForm from '@modules/base-de-datos/BancosForms';
-import CuentasContablesForm from '@modules/base-de-datos/CuentasContablesForm';
-import PropietarioTarjetaForm from '@modules/base-de-datos/PropietarioTarjetaForm';
 import ProveedoresForm from '@modules/base-de-datos/ProveedoresForm';
+import CentroCostosForm from '@modules/base-de-datos/CentroCostosForm';
 
 import axiosInstance from '@utils/axiosConfig';
 
@@ -27,8 +26,7 @@ const DataBaseView = () => {
 
     const [bancosData, setBancosData] = useState([]);
     const [proveedoresData, setProveedoresData] = useState([]);
-    const [cuentasContablesData, setCuentasContablesData] = useState([]);
-    const [propietarioTarjetasData, setPropietariosTarjetasData] = useState([]);
+    const [centroCostosData, setCentroCostosData] = useState([]);
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -36,8 +34,7 @@ const DataBaseView = () => {
     useEffect(() => {
         fetchBancosData();
         fetchProveedores();
-        fetchCuentasContables();
-        fetchPropietariosTrjetas();
+        fetchCentroCostos();
     }, []);
 
     const fetchBancosData = async () => {
@@ -62,10 +59,10 @@ const DataBaseView = () => {
         }
     };
 
-    const fetchCuentasContables = async () => {
+    const fetchCentroCostos = async () => {
         try {
-            const response = await axiosInstance.get('/cuentas-contables');
-            setCuentasContablesData(response.data);
+            const response = await axiosInstance.get('/centro-costos');
+            setCentroCostosData(response.data);
         } catch (err) {
             setError(err.message);
         } finally {
@@ -73,28 +70,16 @@ const DataBaseView = () => {
         }
     };
 
-    const fetchPropietariosTrjetas = async () => {
-        try {
-            const response = await axiosInstance.get('/propietarios-tarjetas');
-            setPropietariosTarjetasData(response.data);
-        } catch (err) {
-            setError(err.message);
-        } finally {
-            setLoading(false);
-        }
-    };
 
     const handleDeleteEntry = async (rowId) => {
         let endpoint = '';
 
         if (modalKey === 'bancos') {
             endpoint = 'bancos';
-        } else if (modalKey === 'cuentasContables') {
-            endpoint = 'cuentas-contables';
+        } else if (modalKey === 'centroDeCostos') {
+            endpoint = 'centro-costos';
         } else if (modalKey === 'proveedores') {
             endpoint = 'proveedores';
-        } else if (modalKey === 'tarjetas') {
-            endpoint = 'propietarios-tarjetas';
         } else {
             console.error('No se ha reconocido la Base de Datos');
             return;
@@ -134,25 +119,21 @@ const DataBaseView = () => {
     };
 
     const dbData = {
-        cuentasContables: cuentasContablesData,
+        centroDeCostos: centroCostosData,
         proveedores: proveedoresData,
-        bancos: bancosData,
-        tarjetas: propietarioTarjetasData
+        bancos: bancosData
     };
 
     const databases = [
-        // { key: 'cuentasContables', name: 'Cuentas Contables' },
         { key: 'proveedores', name: 'Proveedores' },
         { key: 'bancos', name: 'Bancos ProBeco' },
-        { key: 'centroDeCostos', name: 'Centro de Costos' },
-        // { key: 'tarjetas', name: 'Propietarios Tarjetas' }
+        { key: 'centroDeCostos', name: 'Centro de Costos' }
     ];
 
     const formComponents = {
-        cuentasContables: CuentasContablesForm,
         proveedores: ProveedoresForm,
         bancos: BancosForm,
-        tarjetas: PropietarioTarjetaForm
+        centroDeCostos: CentroCostosForm
     };
 
     const columnKeysMap = useMemo(() => {

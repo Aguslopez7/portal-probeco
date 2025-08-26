@@ -36,7 +36,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.configurationSource(request -> {
                     CorsConfiguration config = new CorsConfiguration();
-                    config.setAllowedOriginPatterns(List.of("http://localhost:5174", "http://localhost:5173", "http://localhost:8080", "https://portal-grupo-planeta.up.railway.app"));
+                    config.setAllowedOriginPatterns(List.of("http://localhost:5174", "http://localhost:5173", "http://localhost:8080", "https://portal-probeco.up.railway.app"));
                     config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
                     config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
                     config.setAllowCredentials(true);

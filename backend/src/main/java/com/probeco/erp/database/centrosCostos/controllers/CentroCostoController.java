@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.probeco.erp.database.centrosCostos.dtos.DtoCentroCosto;
 import com.probeco.erp.database.centrosCostos.services.CentroCostoService;
+import com.probeco.erp.dtos.DtoCentroCosto;
+import com.probeco.erp.dtos.DtoCentroCostoRequest;
 
 
 @RestController
@@ -58,7 +59,7 @@ public class CentroCostoController {
 
     @PreAuthorize("hasAnyRole('CONTABLE', 'SYSADMIN')")
     @PutMapping("/{id}")
-    public ResponseEntity<?> editarCentroCosto(@RequestBody DtoCentroCosto dtoCentroCosto, @PathVariable Long id) {
+    public ResponseEntity<?> editarCentroCosto(@RequestBody DtoCentroCostoRequest dtoCentroCosto, @PathVariable Long id) {
         try {
             return ResponseEntity.ok(centroCostoService.editarCentroCosto(dtoCentroCosto, id));
         } catch (Exception e) {

@@ -19,7 +19,7 @@ import ProductosTable from '../components/modules/eventos/ProductosTable';
 {/** <IMPORT_PAGES> **/}
 
 import CrearEvento from '../pages/EventosPage';
-import DashboardView from '../pages/DashBoardView';
+//import DashboardView from '../pages/DashBoardView';
 import { allRoles, bdRoles, cobranzasRoles, pagosRoles, tarjetasRoles } from '@utils/constants';
 
 function AppRouter() {
@@ -91,10 +91,10 @@ function AppRouter() {
                             element={<ModuleCreatorTool />}
                         />
 
-                        <Route
+                        {/* <Route
                             path="dashboard"
                             element={<DashboardView />}
-                        />
+                        /> */}
 
                         <Route
                             path="eventos"
