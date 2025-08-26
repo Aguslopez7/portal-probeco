@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import SchemaFormWrapper from '@components/SchemaFormWrapper';
-import CuentasContablesDropdown from '@components//dropdowns/CuentasContablesDropdown';
+import CentroCostosDropdown from '@components/dropdowns/CentroCostosDropdown';
 import BancosGPDropdown from '@components/dropdowns/BancosGPDropdown';
 import ProveedoresDropdown from '@components/dropdowns/ProveedoresDropdown';
 
@@ -16,7 +16,7 @@ const PagosForm = ({ selectedItemData = {}, isEditing = false }) => {
     const dtoNameRequest = 'DtoPagoRequest';
 
     useEffect(() => {
-        console.log(formData);
+        console.log(formData); // TODO: remove this
     }, [formData]);
     
     useEffect(() => {
@@ -47,6 +47,7 @@ const PagosForm = ({ selectedItemData = {}, isEditing = false }) => {
             );
         }
 
+        // TODO: Replace with BancosPBDropdown
         overrides.bancoEmisor = (formData, onChange) => (
             <BancosGPDropdown
                 name="bancoEmisor"
@@ -56,8 +57,9 @@ const PagosForm = ({ selectedItemData = {}, isEditing = false }) => {
             />
         );
 
-        overrides.nombreCuentaContable = (formData, onChange) => (
-            <CuentasContablesDropdown
+        // TODO: test this
+        overrides.centroCosto = (formData, onChange) => (
+            <CentroCostosDropdown
                 handleChange={onChange}
                 formData={formData}
             />

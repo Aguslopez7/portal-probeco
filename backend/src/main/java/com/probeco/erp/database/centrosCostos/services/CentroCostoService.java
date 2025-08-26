@@ -6,10 +6,11 @@ import java.util.Optional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.probeco.erp.database.centrosCostos.dtos.DtoCentroCosto;
 import com.probeco.erp.database.centrosCostos.entities.CentroCosto;
 import com.probeco.erp.database.centrosCostos.mappers.CentroCostoMapper;
 import com.probeco.erp.database.centrosCostos.repositories.CentroCostoRepository;
+import com.probeco.erp.dtos.DtoCentroCosto;
+import com.probeco.erp.dtos.DtoCentroCostoRequest;
 
 
 @Service
@@ -23,7 +24,7 @@ public class CentroCostoService {
         this.centroCostoMapper = centroCostoMapper;
     }
 
-    public List<DtoCentroCosto> listarCentrosCostos() {
+    public List<DtoCentroCostoRequest> listarCentrosCostos() {
         List<CentroCosto> centrosCostos = centroCostoRepository.findAll();
 
         return centrosCostos.isEmpty()
@@ -31,7 +32,7 @@ public class CentroCostoService {
                 : centrosCostos.stream().map(centroCostoMapper::toDto).toList();
     }
 
-    public DtoCentroCosto obtenerCentroCosto(String nombre) {
+    public DtoCentroCostoRequest obtenerCentroCosto(String nombre) {
         List<CentroCosto> centrosCostos = centroCostoRepository.findAll();
 
         return centrosCostos.stream()
@@ -52,7 +53,7 @@ public class CentroCostoService {
         return ResponseEntity.ok("El centro de costos " + centroCosto.getNombre() + " fue creado correctamente!");
     }
 
-    public ResponseEntity<?> editarCentroCosto(DtoCentroCosto dtoCentroCosto, Long id) {
+    public ResponseEntity<?> editarCentroCosto(DtoCentroCostoRequest dtoCentroCosto, Long id) {
         Optional<CentroCosto> optionalCentroCosto = centroCostoRepository.findById(id);
 
         if (!optionalCentroCosto.isPresent()) {
