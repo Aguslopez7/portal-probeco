@@ -13,7 +13,7 @@ export default defineConfig({
       manifest: {
         name: 'ERP Grupo Planeta',
         short_name: 'ERP',
-        description: 'Enterprise Resource Planning for Grupo Planeta',
+        description: 'Enterprise Resource Planning for ProBeco',
         start_url: '/login',
         display: 'standalone',
         background_color: '#ffffff',
@@ -46,6 +46,8 @@ export default defineConfig({
       workbox: {
         // defining cached files formats
         globPatterns: ["**/*.{js,css,html,ico,png,svg,webmanifest}"],
+        // excluir imágenes grandes específicas
+        globIgnores: ["**/background-*.png"],
       },
     }),
   ],
