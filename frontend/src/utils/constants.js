@@ -32,7 +32,8 @@ export const allRoles = {
     REFERENTE: "ROLE_REFERENTE",
     GERENTE: "ROLE_GERENTE",
     CONTABLE: "ROLE_CONTABLE",
-    VENTAS: "ROLE_VENTAS"
+    VENTAS: "ROLE_VENTAS",
+    MARKETING: "ROLE_MARKETING"
 }
 
 export const pagosRoles = {
@@ -40,7 +41,8 @@ export const pagosRoles = {
     RRHH: "ROLE_RRHH",
     GERENTE: "ROLE_GERENTE",
     CONTABLE: "ROLE_CONTABLE",
-    VENTAS: "ROLE_VENTAS"
+    VENTAS: "ROLE_VENTAS",
+    MARKETING: "ROLE_MARKETING"
 }
 
 export const cobranzasRoles = {
