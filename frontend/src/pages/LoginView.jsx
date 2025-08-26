@@ -85,7 +85,7 @@ const LoginView = () => {
                             </div>
                         )}
 
-                        <Button type="submit" variant="dark" className="w-100">
+                        <Button type="submit" className="w-100" style={{ backgroundColor: 'var(--button-bg-color)', border: 'none' }}>
                             Ingresar
                         </Button>
                     </Form>
