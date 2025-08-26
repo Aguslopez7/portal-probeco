@@ -25,7 +25,7 @@ public class PagoController {
         this.pagoService = pagoService;
     }
 
-    @PreAuthorize("hasAnyRole('CONTABLE', 'GERENTE', 'RRHH', 'VENTAS', 'SYSADMIN')")
+    @PreAuthorize("hasAnyRole('CONTABLE', 'GERENTE', 'RRHH', 'VENTAS', 'SYSADMIN', 'MARKETING')")
     @PostMapping()
     public ResponseEntity<?> agregarPago(@RequestBody DtoPago dtoPago){
         try {
@@ -45,7 +45,7 @@ public class PagoController {
         }
     }
 
-    @PreAuthorize("hasAnyRole('GERENTE', 'RRHH', 'VENTAS')")
+    @PreAuthorize("hasAnyRole('GERENTE', 'RRHH', 'VENTAS', 'MARKETING')")
     @GetMapping("/{username}")
     public ResponseEntity<?> listarPagosPorUsername(@PathVariable String username) {
         try {

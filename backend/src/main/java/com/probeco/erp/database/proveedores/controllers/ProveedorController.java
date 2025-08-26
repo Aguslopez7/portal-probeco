@@ -22,7 +22,7 @@ public class ProveedorController {
         this.excelImportService = excelImportService;
     }
 
-    @PreAuthorize("hasAnyRole('GERENTE', 'CONTABLE', 'SYSADMIN', 'RRHH' , 'VENTAS')")
+    @PreAuthorize("hasAnyRole('GERENTE', 'CONTABLE', 'SYSADMIN', 'RRHH' , 'VENTAS', 'MARKETING')")
     @GetMapping("/r")
     public ResponseEntity<?> listarProveedors() {
         try {
@@ -32,7 +32,7 @@ public class ProveedorController {
         }
     }
 
-    @PreAuthorize("hasAnyRole('CONTABLE', 'GERENTE', 'RRHH', 'SYSADMIN', 'VENTAS')")
+    @PreAuthorize("hasAnyRole('CONTABLE', 'GERENTE', 'RRHH', 'SYSADMIN', 'VENTAS', 'MARKETING')")
     @GetMapping("/{nombre}")
     public ResponseEntity<?> obtenerProveedor(@PathVariable String nombre) {
         try {
