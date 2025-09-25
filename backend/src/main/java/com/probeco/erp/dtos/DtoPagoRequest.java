@@ -17,6 +17,10 @@ public record DtoPagoRequest(
     @JsonPropertyDescription("{\"readOnly\": true}")
     LocalDate fechaSolicitudPago,
 
+    @NotNull
+    @JsonPropertyDescription("{\"format\": \"date\"}")
+    LocalDate fechaVencimiento,
+
     @JsonPropertyDescription("{\"readOnly\": true}")
     String ordenanteDelPago,
 

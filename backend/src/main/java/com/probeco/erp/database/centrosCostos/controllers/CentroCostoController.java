@@ -27,7 +27,7 @@ public class CentroCostoController {
         this.centroCostoService = centroCostoService;
     }
 
-    @PreAuthorize("hasAnyRole('GERENTE', 'CONTABLE', 'SYSADMIN', 'RRHH' , 'VENTAS')")
+    @PreAuthorize("hasAnyRole('GERENTE', 'CONTABLE', 'SYSADMIN', 'RRHH' , 'VENTAS', 'MARKETING')")
     @GetMapping()
     public ResponseEntity<?> listarCentroCostos() {
         try {
@@ -37,7 +37,7 @@ public class CentroCostoController {
         }
     }
 
-    @PreAuthorize("hasAnyRole('CONTABLE', 'GERENTE', 'RRHH', 'SYSADMIN', 'VENTAS')")
+    @PreAuthorize("hasAnyRole('CONTABLE', 'GERENTE', 'RRHH', 'SYSADMIN', 'VENTAS', 'MARKETING')")
     @GetMapping("/{nombre}")
     public ResponseEntity<?> obtenerCentroCosto(@PathVariable String nombre) {
         try {
