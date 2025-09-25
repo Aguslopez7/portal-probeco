@@ -1,5 +1,7 @@
 package com.probeco.erp.dtos;
 
+import java.time.LocalDate;
+
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
@@ -29,6 +31,10 @@ public record DtoPago(
 
     @JsonPropertyDescription("{\"type\": \"file\", \"x-conditional\": {\"field\": \"adjuntaFactura\", \"equals\": \"SI\"}}")
     String factura,
+
+    @NotNull
+    @JsonPropertyDescription("{\"format\": \"date\"}")
+    LocalDate fechaVencimiento,
 
     @JsonPropertyDescription("{\"default\": \"SI\", \"leftOnly\":true}")
     EConfirm existeProveedor,

@@ -29,6 +29,9 @@ public class Pago extends AuditableEntity {
     @Builder.Default
     @Column(name = "fecha_solicitud_pago", nullable = false)
     private LocalDate fechaSolicitudPago = LocalDate.now(); // Default to current date if not provided
+
+    @Column(name = "fecha_vencimiento")
+    private LocalDate fechaVencimiento;
     
     @Column(name = "ordenante_del_pago", nullable = false)
     private String ordenanteDelPago;
