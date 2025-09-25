@@ -27,14 +27,14 @@ public record DtoPago(
     @NotNull
     EConfirm ivaIncluido,
 
+    @NotNull
+    @JsonPropertyDescription("{\"format\": \"date\"}")
+    LocalDate fechaVencimiento,
+
     EConfirm adjuntaFactura,
 
     @JsonPropertyDescription("{\"type\": \"file\", \"x-conditional\": {\"field\": \"adjuntaFactura\", \"equals\": \"SI\"}}")
     String factura,
-
-    @NotNull
-    @JsonPropertyDescription("{\"format\": \"date\"}")
-    LocalDate fechaVencimiento,
 
     @JsonPropertyDescription("{\"default\": \"SI\", \"leftOnly\":true}")
     EConfirm existeProveedor,
