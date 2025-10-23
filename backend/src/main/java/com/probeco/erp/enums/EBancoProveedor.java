@@ -16,7 +16,8 @@ public enum EBancoProveedor {
     SCOTIABANK("Scotiabank"),
     SANTANDER("Santander"),
     PAGO_INTERNET("Pago por Internet"),
-    NO_APLICA("No Aplica");
+    NO_APLICA("No Aplica"),
+    CAJA("Caja");
 
     private final String descripcion;
 

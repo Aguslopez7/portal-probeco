@@ -31,6 +31,8 @@ public class Proveedor extends AuditableEntity {
     @Column(name = "nombre", nullable = false)
     private String name;
 
+    private String rut;
+
     @Column(name = "banco", nullable = false)
     private EBancoProveedor banco;
 
