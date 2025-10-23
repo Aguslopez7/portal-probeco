@@ -6,7 +6,7 @@ import ProveedoresForm from '@modules/base-de-datos/ProveedoresForm';
 
 export const databaseConfig = {
     bancos: {
-        name: 'Bancos Grupo Planeta',
+        name: 'Bancos ProBeco',
         endpoint: '/bancos',
         form: BancosForm,
         importExcel: true,
@@ -26,7 +26,7 @@ export const databaseConfig = {
     },
     proveedores: {
         name: 'Proveedores',
-        endpoint: '/proveedores/r',
+        endpoint: '/proveedores',
         form: ProveedoresForm,
         importExcel: true,
         importConfig: {
