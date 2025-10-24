@@ -31,6 +31,7 @@ public record DtoPagoRequest(
     @NotNull
     String centroCosto,
 
+    @JsonPropertyDescription("{\"format\": \"currency\"}")
     float monto,
     
     EConfirm ivaIncluido,
