@@ -38,6 +38,8 @@ public record DtoPagoRequest(
     @JsonPropertyDescription("{\"type\": \"file\"}")
     String factura,
 
+    String nombreImportacion,
+
     String proveedor,
 
     EBancoProveedor bancoProveedor,
