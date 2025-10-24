@@ -146,12 +146,22 @@ const DynamicBootstrapForm = ({ schema, formData, setFormData, handleSubmit, fie
         setFormData((prev) => ({ ...prev, [name]: val })); // siempre con punto
     };
 
-    const normalizeMonto = (m) => {
+    /*const normalizeMonto = (m) => {
         if (m == null || m === '') return null;
         const s = String(m).replace(/\./g, '').replace(',', '.'); // quita miles y usa punto
         const n = Number(s);
         return Number.isFinite(n) ? n : null;
+    };*/
+
+    const normalizeMonto = (m) => {
+        if (m == null || m === '') return null;
+        const s = String(m);
+        // Si tiene coma, reemplazá; si no, dejá como está
+        const fixed = s.includes(',') ? s.replace(/\./g, '').replace(',', '.') : s;
+        const n = Number(fixed);
+        return Number.isFinite(n) ? n : null;
     };
+
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
