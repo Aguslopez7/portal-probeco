@@ -41,6 +41,7 @@ public record DtoTarjetaRequest(
     EMoneda moneda,
 
     @NotNull
+    @JsonPropertyDescription("{\"format\": \"currency\"}")
     float montoTotal,
 
     @NotNull

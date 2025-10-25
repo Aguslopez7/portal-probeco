@@ -34,8 +34,8 @@ export const agregarPropietarioTarjeta = async (propietario) => {
         toast.success('Propietario Tarjeta creado correctamente');
         return response.data;
     } catch (error) {
-        console.error('Error al crear el Propietario Trajeta', error);
-        toast.error('No se pudo crear el Propietario Trajeta');
+        console.error('Error al crear el Propietario Tarjeta', error);
+        toast.error('No se pudo crear el Propietario Tarjeta');
         return null;
     }
 };
@@ -43,11 +43,11 @@ export const agregarPropietarioTarjeta = async (propietario) => {
 export const editarPropietarioTarjeta = async (id, propietario) => {
     try {
         const response = await axiosInstance.put(`/propietarios-tarjetas/${id}`, propietario);
-        toast.success('Propietario Trajeta editado correctamente');
+        toast.success('Propietario Tarjeta editado correctamente');
         return response.data;
     } catch (error) {
-        console.error('Error al editar el Propietario Trajeta', error);
-        toast.error('No se pudo editar el Propietario Trajeta');
+        console.error('Error al editar el Propietario Tarjeta', error);
+        toast.error('No se pudo editar el Propietario Tarjeta');
         return null;
     }
 };
@@ -94,8 +94,8 @@ export const editarTarjeta = async (id, tarjeta) => {
         toast.success('Gasto tarjeta editado correctamente');
         return response.data;
     } catch (error) {
-        console.error('Error al editar gasto trajeta', error);
-        toast.error('No se pudo editar gasto trajeta');
+        console.error('Error al editar gasto Tarjeta', error);
+        toast.error('No se pudo editar gasto Tarjeta');
         return null;
     }
 };

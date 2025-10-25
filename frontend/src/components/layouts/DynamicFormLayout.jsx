@@ -159,11 +159,20 @@ const DynamicBootstrapForm = ({ schema, formData, setFormData, handleSubmit, fie
         e.preventDefault();
         const form = e.currentTarget;
 
-        // normalizá SOLO monto justo antes de enviar
-        const nextData = {
-            ...formData,
-            monto: normalizeMonto(formData.monto)
-        };
+        // Normalizar todos los campos que sean monto, importe o total antes de ENVIAR
+            const nextData = Object.fromEntries(
+            Object.entries(formData).map(([key, value]) => {
+                if (
+                    key.toLowerCase().includes('monto') ||
+                    key.toLowerCase().includes('importe') ||
+                    key.toLowerCase().includes('total')
+                ) {
+                    return [key, normalizeMonto(value)];
+                }
+                return [key, value];
+            })
+            );
+
 
         if (form.checkValidity() === false) {
             e.stopPropagation();
