@@ -13,7 +13,6 @@ public record DtoPago(
     @NotNull
     String conceptoPago,
 
-    @JsonPropertyDescription("{\"default\": \"UYU\"}")
     @NotNull
     EMoneda moneda,
 
@@ -31,6 +30,9 @@ public record DtoPago(
     @JsonPropertyDescription("{\"format\": \"date\"}")
     LocalDate fechaVencimiento,
 
+    String nombreImportacion,
+
+     @JsonPropertyDescription("{\"leftOnly\":true}")
     EConfirm adjuntaFactura,
 
     @JsonPropertyDescription("{\"type\": \"file\", \"x-conditional\": {\"field\": \"adjuntaFactura\", \"equals\": \"SI\"}}")

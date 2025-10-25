@@ -82,6 +82,9 @@ public class Pago extends AuditableEntity {
     
     @Column(name = "nombre_cuenta_contable")
     private String nombreCuentaContable;
+
+    @Column(name = "nombre_importacion")
+    private String nombreImportacion;
     
     @Builder.Default
     @Enumerated(EnumType.STRING) // Save enum as a string in the database
