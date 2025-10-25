@@ -4,7 +4,7 @@ import axiosInstance from '@utils/axiosConfig';
 
 export const listarProveedores = async () => {
     try {
-        const response = await axiosInstance.get('/proveedores/r');
+        const response = await axiosInstance.get('/proveedores');
         const proveedores = response.data;
         return proveedores;
     } catch (err) {

@@ -8,15 +8,15 @@ import useResponsive from '@hooks/useResponsive';
 import { FaCheck } from 'react-icons/fa';
 import { PiWarningCircleBold } from 'react-icons/pi';
 
-const SearchableDropdown = ({ dropdownData, dataValue, dataLabel, handleChange, label, name, value, placeholder, required = false, isInvalid = false, isValidated = false }) => {
+const SearchableDropdown = ({ dropdownData = [], dataValue, dataLabel, handleChange, label, name, value, placeholder, required = false, isInvalid = false, isValidated = false }) => {
     const { isMobile } = useResponsive();
 
     const opciones = useMemo(
         () =>
-            dropdownData.map((data) => ({
+            dropdownData && dropdownData.map((data) => ({
                 value: data[dataValue] ?? data.name,
                 label: data[dataLabel] ?? data.name
-            })),
+            })) || [],
         [dropdownData]
     );
 
