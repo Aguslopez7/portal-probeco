@@ -45,3 +45,21 @@ export const isUrl = (value) => {
 };
 
 export const isReverseDateFormat = (val) => /^\d{4}-\d{2}-\d{2}$/.test(val);
+
+export const isCurrency = (value) => String(value).startsWith('$') || /^USD\s*/i.test(value);
+
+export const formatCurrency = (value) => new Intl.NumberFormat('es-UY', { style: 'currency', currency: 'UYU', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(value);
+
+// Utilidad para transformar camelCase -> kebab-case
+export const formatCamelToKebab = (str) => {
+    return str
+        .replace(/([a-z0-9])([A-Z])/g, '$1-$2') // inserta guion entre minúscula/dígito y mayúscula
+        .toLowerCase();
+};
+
+// Utilidad para remover el id generado automaticamente desde front
+export const removeIds = (items) => {
+    if (!Array.isArray(items)) return [];
+    return items.map(({ id, ...rest }) => rest);
+};
+
