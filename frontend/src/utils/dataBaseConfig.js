@@ -3,6 +3,7 @@ import BancosForm from '@modules/base-de-datos/BancosForms';
 import CuentasContablesForm from '@modules/base-de-datos/CuentasContablesForm';
 import PropietarioTarjetaForm from '@modules/base-de-datos/PropietarioTarjetaForm';
 import ProveedoresForm from '@modules/base-de-datos/ProveedoresForm';
+import CentroCostosForm from '@modules/base-de-datos/CentroCostosForm';
 
 export const databaseConfig = {
     bancos: {
@@ -22,6 +23,12 @@ export const databaseConfig = {
         name: 'Propietarios Tarjetas',
         endpoint: '/propietarios-tarjetas',
         form: PropietarioTarjetaForm,
+        importExcel: false
+    },
+    centroDeCostos: {
+        name: 'Centros de Costos',
+        endpoint: '/centro-costos',
+        form: CentroCostosForm,
         importExcel: false
     },
     proveedores: {
