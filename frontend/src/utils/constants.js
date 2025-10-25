@@ -64,3 +64,24 @@ export const tarjetasRoles = {
     CONTABLE: "ROLE_CONTABLE",
     VENTAS: "ROLE_VENTAS"
 }
+
+export const STATUS_VARIANTS = {
+    // Warning
+    PENDIENTE: 'warning',
+    PREPARACION: 'warning',
+    // Success
+    PAGADO: 'success',
+    CARGADO: 'success',
+    ACREDITADO: 'success',
+    APROBADO: 'success',
+    COMPLETADO: 'success',
+    REGISTRADO: 'success',
+    ENVIADO: 'success',
+    CONTROLADO: 'success',
+    PREPARADO: 'success',
+    CARGADO: 'success',
+    // Danger
+    RECHAZADO: 'danger',
+    CANCELADO: 'danger',
+    DEVUELTO: 'danger'
+};

@@ -1,4 +1,4 @@
-import { reverseFormatDate } from "./helperMethods";
+import { reverseFormatDate } from './helperMethods';
 
 export const mapSelectedItemToFormData = (selectedItemData) => {
     if (!selectedItemData || Object.keys(selectedItemData).length === 0) return {};
@@ -19,7 +19,6 @@ export const mapSelectedItemToFormData = (selectedItemData) => {
 
     return newFormData;
 };
-
 
 export const getSchemaDefaultsValues = (schema) => {
     const defaultData = {};
@@ -44,4 +43,28 @@ export const getSchemaDefaultsValues = (schema) => {
     }
 
     return defaultData;
+};
+
+export const looksLikeJsonObject = (s) => typeof s === 'string' && s.trim().startsWith('{') && s.trim().endsWith('}');
+
+export const extractMeta = (prop = {}) => {
+    //console.log('Extracting meta from property:', prop);
+    let fromDesc = {};
+    if (looksLikeJsonObject(prop?.description)) {
+        try {
+            fromDesc = JSON.parse(prop.description);
+            //console.log('Parsed description JSON for property:', prop, fromDesc);
+        } catch {}
+    }
+    // Prioridad a claves directas si el backend las promovió
+    return {
+        ...fromDesc,
+        section: prop.section ?? fromDesc.section,
+        leftOnly: prop.leftOnly ?? fromDesc.leftOnly,
+        readOnly: prop.readOnly ?? fromDesc.readOnly,
+        hidden: prop.hidden ?? fromDesc.hidden,
+        'x-conditional': prop['x-conditional'] ?? fromDesc['x-conditional'],
+        default: prop.default ?? fromDesc.default,
+        format: prop.format ?? fromDesc.format // clave para render/orden
+    };
 };
