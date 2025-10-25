@@ -23,7 +23,7 @@ public class ProveedorController {
     }
 
     @PreAuthorize("hasAnyRole('GERENTE', 'CONTABLE', 'SYSADMIN', 'RRHH' , 'VENTAS', 'MARKETING')")
-    @GetMapping("/r")
+    @GetMapping()
     public ResponseEntity<?> listarProveedors() {
         try {
             return ResponseEntity.ok(proveedorService.listarProveedors());

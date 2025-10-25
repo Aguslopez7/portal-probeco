@@ -1,139 +1,71 @@
 import { useEffect, useMemo, useState } from 'react';
 
-import { Button, ListGroup, Modal } from 'react-bootstrap';
+import { Button, ListGroup, Modal, Tab, Tabs } from 'react-bootstrap';
 import toast from 'react-hot-toast';
 
 import ImportExcelButton from '@components/ImportExcelButton';
 import ModuleTable from '@components/table/ModuleTable';
 
-import BancosForm from '@modules/base-de-datos/BancosForms';
-import ProveedoresForm from '@modules/base-de-datos/ProveedoresForm';
-import CentroCostosForm from '@modules/base-de-datos/CentroCostosForm';
-
 import axiosInstance from '@utils/axiosConfig';
+import { databaseConfig } from '@utils/dataBaseConfig';
+
+import useResponsive from '../hooks/useResponsive';
 
 import { BsDatabaseCheck } from 'react-icons/bs';
 import { FaDatabase } from 'react-icons/fa';
-import { IoMdAddCircleOutline } from 'react-icons/io';
 import { TiThMenu } from 'react-icons/ti';
 
 const DataBaseView = () => {
+    const { isSmallDevice } = useResponsive();
+
     const [showModal, setShowModal] = useState(false);
-    const [modalTitle, setModalTitle] = useState('');
-    const [modalContent, setModalContent] = useState(null);
     const [modalKey, setModalKey] = useState('');
-    const [isListView, setIsListView] = useState(false);
+    const [activeTab, setActiveTab] = useState('add'); // tab por defecto
 
-    const [bancosData, setBancosData] = useState([]);
-    const [proveedoresData, setProveedoresData] = useState([]);
-    const [centroCostosData, setCentroCostosData] = useState([]);
-
-    const [loading, setLoading] = useState(true);
+    const [dbData, setDbData] = useState({});
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
+    // 🔹 fetch genérico
+    const fetchData = async (key, endpoint) => {
+        setLoading(true);
+        try {
+            const response = await axiosInstance.get(endpoint);
+            setDbData((prev) => ({ ...prev, [key]: response.data }));
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     useEffect(() => {
-        fetchBancosData();
-        fetchProveedores();
-        fetchCentroCostos();
+        Object.entries(databaseConfig).forEach(([key, { endpoint }]) => {
+            fetchData(key, endpoint);
+        });
     }, []);
 
-    const fetchBancosData = async () => {
+    const handleDeleteEntry = async (key, rowId) => {
+        const { endpoint } = databaseConfig[key];
         try {
-            const response = await axiosInstance.get('/bancos');
-            setBancosData(response.data);
+            await axiosInstance.delete(`${endpoint}/${rowId}`);
+            toast.success('Se ha eliminado con éxito!');
+            fetchData(key, endpoint);
         } catch (err) {
             setError(err.message);
-        } finally {
-            setLoading(false);
         }
     };
 
-    const fetchProveedores = async () => {
-        try {
-            const response = await axiosInstance.get('/proveedores/r');
-            setProveedoresData(response.data);
-        } catch (err) {
-            setError(err.message);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const fetchCentroCostos = async () => {
-        try {
-            const response = await axiosInstance.get('/centro-costos');
-            setCentroCostosData(response.data);
-        } catch (err) {
-            setError(err.message);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-
-    const handleDeleteEntry = async (rowId) => {
-        let endpoint = '';
-
-        if (modalKey === 'bancos') {
-            endpoint = 'bancos';
-        } else if (modalKey === 'centroDeCostos') {
-            endpoint = 'centro-costos';
-        } else if (modalKey === 'proveedores') {
-            endpoint = 'proveedores';
-        } else {
-            console.error('No se ha reconocido la Base de Datos');
-            return;
-        }
-
-        try {
-            const response = await axiosInstance.delete(`/${endpoint}/${rowId}`);
-            if (response) {
-                toast.success('Se ha eliminado con éxito!');
-                return true;
-            }
-        } catch (err) {
-            setError(err.message);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        if (showModal) {
-            setModalContent(isListView ? renderList() : renderForm());
-        }
-    }, [showModal]);
-
-    const handleShowModal = (key, action, title, listView = false) => {
+    const handleOpenModal = (key) => {
         setModalKey(key);
-        setModalTitle(title);
-        setIsListView(listView);
+        setActiveTab('add'); // siempre arranca en la tab "Listar"
         setShowModal(true);
     };
 
     const handleCloseModal = () => {
         setShowModal(false);
-        setModalKey('');
-        setModalTitle('');
-        setIsListView(false);
-    };
-
-    const dbData = {
-        centroDeCostos: centroCostosData,
-        proveedores: proveedoresData,
-        bancos: bancosData
-    };
-
-    const databases = [
-        { key: 'proveedores', name: 'Proveedores' },
-        { key: 'bancos', name: 'Bancos ProBeco' },
-        { key: 'centroDeCostos', name: 'Centro de Costos' }
-    ];
-
-    const formComponents = {
-        proveedores: ProveedoresForm,
-        bancos: BancosForm,
-        centroDeCostos: CentroCostosForm
+        //setModalKey('');
+        //setActiveTab('add');
     };
 
     const columnKeysMap = useMemo(() => {
@@ -144,22 +76,23 @@ const DataBaseView = () => {
         return map;
     }, [dbData]);
 
-    const renderForm = () => {
-        const FormComponent = formComponents[modalKey];
-        return FormComponent ? <FormComponent /> : <p>Seleccione una opción válida.</p>;
+    const renderForm = (key) => {
+        const FormComponent = databaseConfig[key]?.form;
+        return FormComponent ? <FormComponent /> : <p>No existe formulario asociado.</p>;
     };
 
-    const renderList = () => {
-        const data = dbData[modalKey];
-        if (!data || data.length === 0) return <>No hay datos cargados en esta base de datos.</>;
+    const renderList = (key) => {
+        const data = dbData[key];
+        if (!data || data.length === 0) return <>No hay datos cargados.</>;
 
+        const FormComponent = databaseConfig[key]?.form;
         return (
             <ModuleTable
-                editableForm={formComponents[modalKey]}
-                deleteEndpoint={handleDeleteEntry}
+                editableForm={FormComponent}
+                deleteEndpoint={(rowId) => handleDeleteEntry(key, rowId)}
                 data={data}
-                columnKeys={columnKeysMap[modalKey]}
-                filename={modalKey}
+                columnKeys={columnKeysMap[key]}
+                filename={key}
             />
         );
     };
@@ -174,7 +107,7 @@ const DataBaseView = () => {
             <hr />
             <br />
             <ListGroup>
-                {databases.map(({ key, name }) => (
+                {Object.entries(databaseConfig).map(([key, { name }]) => (
                     <ListGroup.Item
                         key={key}
                         style={{ display: 'flex', alignItems: 'center', fontWeight: '500' }}
@@ -185,41 +118,67 @@ const DataBaseView = () => {
                         />
                         {name}
                         <div className="ms-auto d-flex gap-2">
-                            <ImportExcelButton
-                                currentColumnKey={key}
-                                name={name}
-                                columnKeys={columnKeysMap[key]}
-                            />
                             <Button
                                 size="sm"
-                                style={{backgroundColor: 'var(--button-bg-color)'}}
-                                onClick={() => handleShowModal(key, 'add', `Agregar ${name}`)}
+                                variant="dark"
+                                onClick={() => handleOpenModal(key)}
                             >
-                                <IoMdAddCircleOutline size={22} />
-                            </Button>
-                            <Button
-                                size="sm"
-                                style={{backgroundColor: 'var(--button-bg-color)'}}
-                                onClick={() => handleShowModal(key, 'list', `Lista de ${name}`, true)}
-                            >
-                                <TiThMenu size={20} />
+                                <TiThMenu
+                                    size={20}
+                                    style={{ marginRight: isSmallDevice ? '0px' : '6px' }}
+                                />
+                                {isSmallDevice ? '' : 'Administrar'}
                             </Button>
                         </div>
                     </ListGroup.Item>
                 ))}
             </ListGroup>
 
+            {/* Modal con Tabs */}
             <Modal
                 show={showModal}
                 onHide={handleCloseModal}
                 centered
                 scrollable
                 size="lg"
+                enforceFocus={false} 
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>{modalTitle}</Modal.Title>
+                    <Modal.Title>Administrar {modalKey && databaseConfig[modalKey]?.name}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>{modalContent}</Modal.Body>
+                <Modal.Body>
+                    <Tabs
+                        id="db-tabs"
+                        activeKey={activeTab}
+                        onSelect={(k) => setActiveTab(k)}
+                        className="mb-3"
+                    >
+                        <Tab
+                            eventKey="add"
+                            title="Agregar"
+                        >
+                            {modalKey && renderForm(modalKey)}
+                        </Tab>
+                        <Tab
+                            eventKey="list"
+                            title="Listar"
+                        >
+                            {modalKey && renderList(modalKey)}
+                        </Tab>
+                        {databaseConfig[modalKey]?.importExcel && (
+                            <Tab
+                                eventKey="import"
+                                title="Importar"
+                            >
+                                <ImportExcelButton
+                                    currentColumnKey={modalKey}
+                                    name={databaseConfig[modalKey]?.name}
+                                    columnKeys={columnKeysMap[modalKey]}
+                                />
+                            </Tab>
+                        )}
+                    </Tabs>
+                </Modal.Body>
             </Modal>
         </div>
     );

@@ -148,8 +148,10 @@ const DynamicBootstrapForm = ({ schema, formData, setFormData, handleSubmit, fie
 
     const normalizeMonto = (m) => {
         if (m == null || m === '') return null;
-        const s = String(m).replace(/\./g, '').replace(',', '.'); // quita miles y usa punto
-        const n = Number(s);
+        const s = String(m);
+        // Si tiene coma, reemplazá; si no, dejá como está
+        const fixed = s.includes(',') ? s.replace(/\./g, '').replace(',', '.') : s;
+        const n = Number(fixed);
         return Number.isFinite(n) ? n : null;
     };
 

@@ -91,7 +91,7 @@ export const agregarTarjeta = async (tarjeta) => {
 export const editarTarjeta = async (id, tarjeta) => {
     try {
         const response = await axiosInstance.put(`/tarjetas/${id}`, tarjeta);
-        toast.success('Gasto tarajeta editado correctamente');
+        toast.success('Gasto tarjeta editado correctamente');
         return response.data;
     } catch (error) {
         console.error('Error al editar gasto trajeta', error);

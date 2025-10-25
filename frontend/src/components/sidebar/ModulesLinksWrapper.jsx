@@ -61,17 +61,17 @@ const ModulesLinksWrapper = () => {
                 label="Pagos"
                 isDisabled={!isPagosRoles}
             />
-            {/*<SidebarLink
-                to="/cobranzas"
-                icon={FaFileInvoiceDollar}
-                label="Cobranzas"
-                isDisabled={!isCobranzasRoles}
-            />
             <SidebarLink
                 to="/tarjetas"
                 icon={FaCreditCard}
                 label="Tarjetas"
                 isDisabled={!isTarjetasRoles}
+            />
+            {/*<SidebarLink
+                to="/cobranzas"
+                icon={FaFileInvoiceDollar}
+                label="Cobranzas"
+                isDisabled={!isCobranzasRoles}
             />
             <SidebarLink
                 to="/eventos"

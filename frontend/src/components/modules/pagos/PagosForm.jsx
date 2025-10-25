@@ -14,10 +14,6 @@ const PagosForm = ({ selectedItemData = {}, isEditing = false }) => {
 
     const dtoName = 'DtoPago';
     const dtoNameRequest = 'DtoPagoRequest';
-
-    useEffect(() => {
-        console.log(formData); // TODO: remove this
-    }, [formData]);
     
     useEffect(() => {
         if (selectedItemData && isEditing) {

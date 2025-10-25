@@ -31,12 +31,15 @@ public record DtoPagoRequest(
     @NotNull
     String centroCosto,
 
+    @JsonPropertyDescription("{\"format\": \"currency\"}")
     float monto,
     
     EConfirm ivaIncluido,
 
     @JsonPropertyDescription("{\"type\": \"file\"}")
     String factura,
+
+    String nombreImportacion,
 
     String proveedor,
 
