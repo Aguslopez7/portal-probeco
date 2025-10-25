@@ -9,6 +9,8 @@ public record DtoProveedor(
     @NotNull
     String name,
 
+    String rut,
+
     @NotNull
     EBancoProveedor banco,
 

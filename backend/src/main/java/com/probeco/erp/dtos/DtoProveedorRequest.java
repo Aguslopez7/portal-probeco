@@ -14,6 +14,8 @@ public record DtoProveedorRequest(
     @NotNull
     String name,
 
+    String rut,
+
     @NotNull
     EBancoProveedor banco,
 
